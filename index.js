@@ -1,27 +1,27 @@
-const https = require('https');
+let weatherLondon = require('./weather')
 
-const userId = 2;
-const url = `https://jsonplaceholder.typicode.com/users/${userId}`;
 
-let name 
-let phone
+//let weatherLondon = require('./weather')
+//let weatherLondon = require('./pilotAffected')
+const x = weatherLondon.weather
 
-https.get(url, (res) => {
-    let data = '';
-    res.on('data', (chunk) => {
-        data += chunk;
-    });
-    res.on('end', () => {
-        const user = JSON.parse(data);
-        name = user.name
-        phone = user.phone
-        console.log(`Nombre: ${name}`);
-        console.log(`Telefono: ${phone}`);
-    });
-}).on('error', (err) => {
-    console.log(`Error: ${err.message}`);
-});
+console.log(`Lat: ${weatherLondon.coord.lat}`);
+console.log(`Lon: ${weatherLondon.coord.lon}`);
 
+//console.log(`Edad: ${weatherLondon.weather[0].pilotAffected[0].age}`);
+console.log(`Las afectados mayores a 18 años son: `);
+for(var i=0; i<3; i++)
+{
+    
+    if (weatherLondon.weather[0].pilotAffected[i].age >= 18){
+
+        console.log(`Nombre: ${weatherLondon.weather[0].pilotAffected[i].name}`);
+    }
+}
+
+
+//console.log(weatherLondon.coord.lat)
+//console.log(weatherLondon.coord.lon)
 
 
 
